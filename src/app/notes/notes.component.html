@@ -1,0 +1,61 @@
+
+<div class="container">
+    <div class="mt-3">
+        <h2 class="text-end text-primary" >Welcome {{username}}</h2>
+        <button class="btn btn-secondary float-end"(click)="logout()" style="margin-top: 10px;">Logout</button>
+    </div>
+    <div style="margin-top: 20px;"  id="c">
+        <div>
+            <form class="row g-3 mt-5 bg-light p-3" #formRef="ngForm" (ngSubmit)="formRef.form.valid&&onSubmit(formRef)">
+                <div class="col-12">
+                    <label for="inputDate" class="form-label">Date</label>
+                    <input type="date" name="date" id="inputDate"  class="form-control" ngModel required #date="ngModel">
+                        <!-- validation for username -->
+                    <span class="text-danger" *ngIf="(date.touched || formRef.submitted) && date.errors?.required">
+                                    Date is required
+                    </span>
+                </div> 
+                <div class="col-md-2">
+                    <label for="inputToDo" class="form-label">notes</label>
+                    <input type="text" class="form-control" id="inputToDo" name="ToDo" ngModel>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+           </form>
+        </div>
+        <div>
+            <input type="text" name="search" id="search" placeholder="Search by title" class="form-control mt-3" [(ngModel)]="searchTerm">
+        <table class="table" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>ToDo</th>
+                    <th>date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let v of userObj | search : searchTerm">
+                <tr *ngIf="(!s && v.id === myrefid)">
+                <td><input type="text" name="task" [value]="v.ToDo" #r1></td>
+                <td><input type="date" name="date" [value]="v.date" #r2></td>
+                <td><a (click)="save(v.id,r1.value,r2.value)"><button class="btn btn-success">save</button></a></td>
+                <td><a (click)="Todelete(v.id)"><button class="btn btn-danger">delete</button></a></td>
+                </tr>
+                <tr *ngIf="(s)||(!s && v.id !== myrefid)">
+                <td>{{v.ToDo}}</td>
+                <td>{{v.date}}</td>
+                <td><a (click)="edit(v.id)"><button class="btn btn-success">edit</button></a></td>
+                <td><a (click)="Todelete(v.id)"><button class="btn btn-danger">delete</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    
+</div>
+</div>
+
+
+
+
