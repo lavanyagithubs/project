@@ -11,19 +11,17 @@ require("dotenv").config();
 
 //import api objects
 const userApiObj = require("./APIS/userApi");
-const notesApiObj = require("./APIS/notesApi");
 
 
-//import express-async-handler
-//const asyncErrHandler = require("express-async-handler");
+
+
 
 //forward
 
 
 
 app.use("/user",userApiObj);
-app.use("/notes",notesApiObj);
-//app.use("/admin",adminApiObj);
+
 
 app.use(exp.static(path.join(__dirname,"./dist/googlekeep")));
 
@@ -36,13 +34,13 @@ mc.connect(dburl,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(client=>{
 
     //get database object
-    const databaseObject = client.db("ToDoList");
+    const databaseObject = client.db("googlekeep");
     const userCollectionObject = databaseObject.collection("usercollection");
-    const notesCollectionObject = databaseObject.collection("notescollection");
+  
     
     //sharing collection object
     app.set("userCollectionObject",userCollectionObject);
-    app.set("notesCollectionObject",notesCollectionObject);
+    
     console.log("Connected to database server...");
 })
 .catch(err=>console.log("err in db connection",err));

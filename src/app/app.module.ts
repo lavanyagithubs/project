@@ -7,14 +7,16 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DisplayComponent } from './display/display.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component'
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
     DisplayComponent,
-    DashboardComponent
+    DashboardComponent,
+    ForgetpasswordComponent
   ],
   imports: [
     BrowserModule,
