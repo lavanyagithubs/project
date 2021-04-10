@@ -17,6 +17,7 @@ export class NotesComponent implements OnInit {
   notes;
   id1;
   session = true;
+  timeout;
 
   update = {title:"" , note : " ",id:""}
   constructor(private us:UserService , private ru:Router , private ts:ToastrService) { }
@@ -41,6 +42,7 @@ export class NotesComponent implements OnInit {
          
           this.onCall()
           this.ts.success('notes created successfully')
+          value.reset();
         }
         else if(res["message"]=="session expired..plz relogin to continue")
         {
@@ -142,6 +144,18 @@ export class NotesComponent implements OnInit {
       this.ts.success('user logged out successfully')
       this.ru.navigateByUrl("/login");
     }
+
+    onAlert()
+    {
+     
+      console.log(this.timeout);
+      setTimeout(() => {
+        
+        this.ts.error(`remainder working after ${this.timeout} milliseconds`);
+      }, this.timeout);
+    }
+
+  
 
 
 }
