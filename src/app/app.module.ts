@@ -16,6 +16,7 @@ import { ToastrModule} from 'ngx-toastr';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
     NotesComponent,
     SearchPipe,
     HomeComponent,
-    PasswordresetComponent
+    PasswordresetComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
