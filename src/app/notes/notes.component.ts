@@ -173,7 +173,7 @@ export class NotesComponent implements OnInit {
     console.log("time is",this.time)
     this.us.getReminder(this.time).subscribe(
       res=>{
-        if(res["message"]==ArrayType)
+        if(res["message"])
         {
           console.log(res["message"]);
           console.log("time has found")
