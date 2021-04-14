@@ -1,3 +1,4 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -172,7 +173,7 @@ export class NotesComponent implements OnInit {
     console.log("time is",this.time)
     this.us.getReminder(this.time).subscribe(
       res=>{
-        if(res["message"])
+        if(res["message"]==ArrayType)
         {
           console.log(res["message"]);
           console.log("time has found")
