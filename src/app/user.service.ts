@@ -37,4 +37,10 @@ export class UserService {
   changePassword(obj){
     return this.hc.post("/user/passwordreset",obj)
   }
+
+  
+  getReminder(time:string):Observable<any>{
+    return this.hc.get("/notes/getreminder/"+time)
+  }
+
 }

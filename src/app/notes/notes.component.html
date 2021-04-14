@@ -95,7 +95,7 @@
                            </div>
                            
                         
-                           <div class="btn btn-outline-success " style="margin-left: 35%;"  data-bs-toggle="modal" data-bs-target="#staticBackdrop12"  ><i class="fas fa-stopwatch"></i></div>
+                           <div class="btn btn-outline-success " style="margin-left: 35%;"  data-bs-toggle="modal" data-bs-target="#staticBackdrop12" (click)="gotoModal(n)" ><i class="fas fa-stopwatch"></i></div>
     
                               
                                 
@@ -107,14 +107,15 @@
                                         
                                         <div class="modal-body">
                                             
-                                            
-                                            <input type="number" class="form-control m-2 inp1" name="note" placeholder="enter time" [(ngModel)]="timeout">
+                                            <input type="time" style="font-family: cursive;" class="form-control m-2 inp1" name="time" placeholder="Enter time" [(ngModel)]="update.time">
+
                                         </div>
             
                                         
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-success"  (click)="onAlert()" data-bs-dismiss="modal"><i class="far fa-save"></i></button>
-            
+                                            
+                                            <button type="button" class="btn btn-outline-success"  (click)="save()" (click)="timer()" data-bs-dismiss="modal"><i class="far fa-save"></i></button>
+                                            <button type="button" class="btn btn-danger"   data-bs-dismiss="modal">close</button>
                                         </div>
                                     </div>
                                     

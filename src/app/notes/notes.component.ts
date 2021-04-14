@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { timer } from 'rxjs';
 import { UserService } from '../user.service';
 
 @Component({
@@ -17,9 +18,11 @@ export class NotesComponent implements OnInit {
   notes;
   id1;
   session = true;
-  timeout;
+  remind:any;
+  time;
+  time1;
 
-  update = {title:"" , note : " ",id:""}
+  update = {title:"" , note : " ",id:"", time:" "}
   constructor(private us:UserService , private ru:Router , private ts:ToastrService) { }
 
   ngOnInit(): void {
@@ -27,6 +30,7 @@ export class NotesComponent implements OnInit {
    this.username = localStorage.getItem("username")
    this.onCall()
    this.onDelete;
+   //this.timer();
   }
   
 
@@ -109,8 +113,9 @@ export class NotesComponent implements OnInit {
     {
       console.log(v);
       this.update.title= v.title;
-      this.update.note = v.note;
-      this.update.id = v.id;
+      this.update.note = v.note;   
+     this.update.time=v.time;
+     this.update.id = v.id;
     }
 
     save()
@@ -145,17 +150,48 @@ export class NotesComponent implements OnInit {
       this.ru.navigateByUrl("/login");
     }
 
-    onAlert()
-    {
-     
-      console.log(this.timeout);
-      setTimeout(() => {
-        
-        this.ts.error(`remainder working after ${this.timeout} milliseconds`);
-      }, this.timeout);
-    }
+   
+  timer(){  
+    setInterval(()=>{
+      this.onTimeOut();
+    },10000)
+      }
 
+  onTimeOut(){
+    console.log("this calls for every 1 minutes")
+    var x=new Date();
+    this.remind= x.getHours() + ":" + x.getMinutes()
+   
+    this.reminder();
+    //this.timer();
   
+   }
+      
+   reminder(){
+    this.time=this.remind;
+    console.log("time is",this.time)
+    this.us.getReminder(this.time).subscribe(
+      res=>{
+        if(res["message"])
+        {
+          console.log(res["message"]);
+          console.log("time has found")
+          this.ts.warning('reminded')
+            
+        }
+         /*else if(res["message"]=="session expired..plz relogin to continue")
+          {
+            this.session=!this.session
+             alert(res["message"]);
+             this.ru.navigateByUrl("/login");
+           }
+           */
+        
+      },
+      err=> console.log("something went wrong")
+    )
+  
+  }
 
 
 }
